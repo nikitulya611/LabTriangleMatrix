@@ -4,7 +4,7 @@
 
 
 template<class T>
-class UpTriangleMatrix : protected Vector<Vector<T>>
+class UpTriangleMatrix : public Vector<Vector<T>>
 {
 public:
 	UpTriangleMatrix(int m_size = 1);
