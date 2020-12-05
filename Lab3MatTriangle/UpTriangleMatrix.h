@@ -12,12 +12,14 @@ public:
 
 	void resize(int m_size);
 
-	void set(int i, int j, T value);
-	T get(int i, int j) const;
-
 	Vector<T> getRow(int i) const;
 	Vector<T> getColumn(int j) const;
 
+	UpTriangleMatrix<T> operator+(UpTriangleMatrix<T>& op);
+	UpTriangleMatrix<T> operator-(UpTriangleMatrix<T>& op);
+	UpTriangleMatrix<T> operator-();
+	UpTriangleMatrix<T> operator*(double value);
+	UpTriangleMatrix<T> operator*(UpTriangleMatrix<T>& op);
 
 	friend std::ostream& operator<<(std::ostream& out, const UpTriangleMatrix<T>& m)
 	{
@@ -40,16 +42,6 @@ public:
 		return in;
 	}
 
-	UpTriangleMatrix<T> operator+(UpTriangleMatrix<T>& op);
-	UpTriangleMatrix<T> operator-(UpTriangleMatrix<T>& op);
-	UpTriangleMatrix<T> operator-();
-	UpTriangleMatrix<T> operator*(double value);
-	UpTriangleMatrix<T> operator*(UpTriangleMatrix<T>& op);
-
-
-private:
-	
-
 };
 
 template<class T>
@@ -70,18 +62,6 @@ template<class T>
 inline void UpTriangleMatrix<T>::resize(int m_size)
 {
 	*this = UpTriangleMatrix<T>(m_size);
-}
-
-template<class T>
-inline void UpTriangleMatrix<T>::set(int i, int j, T value)
-{
-	(*this)[i][j] = value;
-}
-
-template<class T>
-inline T UpTriangleMatrix<T>::get(int i, int j) const
-{
-	return (*this)[i][j];
 }
 
 template<class T>
