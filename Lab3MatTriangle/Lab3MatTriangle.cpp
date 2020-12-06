@@ -3,6 +3,9 @@
 #include <conio.h>
 #include <ctime>
 #include <random>
+#include <chrono>
+#include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -17,14 +20,27 @@ void inputMatrix(UpTriangleMatrix<double>& m)
 
 void Test()
 {
+	ofstream fout;
+	fout.open("log.txt");
+
 	for (int i = 1;; i++)
 	{
-		cout << i << " итерация" << endl;
+		string iteration = "";
+		iteration += to_string(i) + " итерация";
+
+		auto start = chrono::high_resolution_clock::now();
+
 		UpTriangleMatrix<int> m1(i);
 		UpTriangleMatrix<int> m2(i);
-		
 		m1 + m2;
 		m1 * m2;
+
+		auto end = chrono::high_resolution_clock::now();
+		auto elapsed = chrono::duration_cast<chrono::milliseconds>(end - start).count();
+
+		iteration += "\t" + to_string(elapsed) + "ms\n";
+		fout << iteration;
+		cout << iteration;		
 	}
 }
 
